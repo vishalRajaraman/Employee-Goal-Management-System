@@ -1,0 +1,14 @@
+
+=========================================
+  ATOMQUEST Goal Tracker Portal
+  Server running on port 3000
+  URL: http://localhost:3000
+=========================================
+
+Default Admin Credentials:
+  Email: admin@atomquest.com
+  Password: admin123
+
+
+Connected to SQLite database
+Database tables initialized successfully
