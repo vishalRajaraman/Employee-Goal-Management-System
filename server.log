@@ -12,3 +12,8 @@ Default Admin Credentials:
 
 Connected to SQLite database
 Database tables initialized successfully
+Get dashboard error: Error: no such column: ga.employee_id
+    at e.handleError (/workspace/node_modules/sql.js/dist/sql-wasm.js:90:192)
+    at e.tb (/workspace/node_modules/sql.js/dist/sql-wasm.js:88:454)
+    at Database.all (/workspace/server/database.js:267:30)
+    at async /workspace/server/server.js:857:30

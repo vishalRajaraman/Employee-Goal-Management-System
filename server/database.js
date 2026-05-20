@@ -186,6 +186,22 @@ class Database {
                 INSERT INTO users (id, email, password, name, role, department)
                 VALUES (?, ?, ?, ?, ?, ?)
             `, [adminId, 'admin@atomquest.com', hashedPassword, 'System Admin', 'admin', 'HR']);
+            
+            // Create default manager user
+            const managerId = uuidv4();
+            const managerHashedPassword = bcrypt.hashSync('manager123', 10);
+            this.db.run(`
+                INSERT INTO users (id, email, password, name, role, department)
+                VALUES (?, ?, ?, ?, ?, ?)
+            `, [managerId, 'manager@atomquest.com', managerHashedPassword, 'John Manager', 'manager', 'Engineering']);
+            
+            // Create default employee user (reports to manager)
+            const employeeId = uuidv4();
+            const employeeHashedPassword = bcrypt.hashSync('employee123', 10);
+            this.db.run(`
+                INSERT INTO users (id, email, password, name, role, department, manager_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            `, [employeeId, 'employee@atomquest.com', employeeHashedPassword, 'Jane Employee', 'employee', 'Engineering', managerId]);
         }
 
         // Insert default thrust areas

@@ -1,1 +1,12 @@
-Nothing needs to be added to .gitignore since the changes only include source files (.js and .css) without any build artifacts, dependencies, or temporary files.
+```
+# Logs and temp files
+*.log
+
+# Database files
+*.db
+
+# Environment
+.env
+.env.local
+.env.*
+```
