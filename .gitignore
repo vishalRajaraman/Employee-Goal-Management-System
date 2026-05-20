@@ -1,15 +1,1 @@
-```
-# Dependencies
-node_modules/
-
-# Database
-goal_tracker.db
-
-# Logs
-server.log
-
-# Environment
-.env
-.env.local
-*.env.*
-```
+Nothing needs to be added to .gitignore since the changes only include source files (.js and .css) without any build artifacts, dependencies, or temporary files.
