@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATOMQUEST Goal Tracker Portal</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="login-page" class="page active">
+        <div class="login-container">
+            <div class="login-card">
+                <h1>🎯 ATOMQUEST Goal Tracker</h1>
+                <p class="subtitle">Goal Setting & Tracking Portal</p>
+                
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required placeholder="Enter your password">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+                
+                <div class="demo-credentials">
+                    <h4>Demo Credentials:</h4>
+                    <p><strong>Admin:</strong> admin@atomquest.com / admin123</p>
+                    <p><strong>Manager:</strong> manager@atomquest.com / manager123</p>
+                    <p><strong>Employee:</strong> employee@atomquest.com / employee123</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="dashboard-page" class="page">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>🎯 Goal Tracker</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" data-view="goals" class="nav-item active">📋 My Goals</a>
+                <a href="#" data-view="achievements" class="nav-item">📊 Achievements</a>
+                <a href="#" data-view="checkins" class="nav-item">💬 Check-ins</a>
+                <a href="#" data-view="reports" class="nav-item nav-manager-only">📈 Reports</a>
+                <a href="#" data-view="team" class="nav-item nav-manager-only">👥 Team</a>
+                <a href="#" data-view="admin" class="nav-item nav-admin-only">⚙️ Admin</a>
+                <a href="#" data-view="escalations" class="nav-item nav-manager-only">🔔 Escalations</a>
+                <a href="#" data-view="analytics" class="nav-item">📉 Analytics</a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <span id="user-name"></span>
+                    <span id="user-role" class="badge"></span>
+                </div>
+                <button id="logout-btn" class="btn btn-secondary btn-sm">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h1 id="page-title">My Goals</h1>
+                <div class="cycle-selector">
+                    <label>Cycle:</label>
+                    <select id="cycle-select"></select>
+                </div>
+            </header>
+
+            <!-- Goals View -->
+            <div id="goals-view" class="view active">
+                <div class="view-header">
+                    <h2>Goal Sheet</h2>
+                    <div class="action-buttons">
+                        <button id="add-goal-btn" class="btn btn-primary">+ Add Goal</button>
+                        <button id="submit-goals-btn" class="btn btn-success">Submit for Approval</button>
+                    </div>
+                </div>
+
+                <div class="weightage-summary">
+                    <span>Total Weightage: <strong id="total-weightage">0%</strong></span>
+                    <span>Goals: <strong id="goal-count">0/8</strong></span>
+                    <span id="weightage-status"></span>
+                </div>
+
+                <div id="goals-list" class="cards-grid"></div>
+            </div>
+
+            <!-- Achievements View -->
+            <div id="achievements-view" class="view">
+                <div class="view-header">
+                    <h2>Quarterly Achievements</h2>
+                    <div class="quarter-selector">
+                        <label>Quarter:</label>
+                        <select id="quarter-select">
+                            <option value="Q1">Q1 (July)</option>
+                            <option value="Q2">Q2 (October)</option>
+                            <option value="Q3">Q3 (January)</option>
+                            <option value="Q4">Q4 (March/April)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="achievements-list" class="cards-grid"></div>
+            </div>
+
+            <!-- Check-ins View -->
+            <div id="checkins-view" class="view">
+                <div class="view-header">
+                    <h2>Manager Check-ins</h2>
+                </div>
+                <div id="checkins-content"></div>
+            </div>
+
+            <!-- Team View (Manager) -->
+            <div id="team-view" class="view">
+                <div class="view-header">
+                    <h2>Team Overview</h2>
+                </div>
+                <div id="team-content"></div>
+            </div>
+
+            <!-- Reports View -->
+            <div id="reports-view" class="view">
+                <div class="view-header">
+                    <h2>Reports & Analytics</h2>
+                </div>
+                <div class="report-options">
+                    <button id="export-csv-btn" class="btn btn-primary">📥 Export CSV</button>
+                    <button id="completion-dashboard-btn" class="btn btn-info">📊 Completion Dashboard</button>
+                </div>
+                <div id="reports-content"></div>
+            </div>
+
+            <!-- Admin View -->
+            <div id="admin-view" class="view">
+                <div class="view-header">
+                    <h2>Admin Panel</h2>
+                </div>
+                
+                <div class="admin-sections">
+                    <section class="admin-section">
+                        <h3>User Management</h3>
+                        <button id="create-user-btn" class="btn btn-primary">+ Create User</button>
+                        <div id="users-list"></div>
+                    </section>
+
+                    <section class="admin-section">
+                        <h3>Goal Cycles</h3>
+                        <button id="create-cycle-btn" class="btn btn-primary">+ Create Cycle</button>
+                        <div id="cycles-list"></div>
+                    </section>
+
+                    <section class="admin-section">
+                        <h3>Audit Logs</h3>
+                        <button id="view-audit-btn" class="btn btn-info">View Logs</button>
+                        <div id="audit-logs"></div>
+                    </section>
+
+                    <section class="admin-section">
+                        <h3>Shared Goals</h3>
+                        <button id="create-shared-goal-btn" class="btn btn-primary">+ Create Shared Goal</button>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Escalations View -->
+            <div id="escalations-view" class="view">
+                <div class="view-header">
+                    <h2>Escalations</h2>
+                </div>
+                <div id="escalations-list"></div>
+            </div>
+
+            <!-- Analytics View -->
+            <div id="analytics-view" class="view">
+                <div class="view-header">
+                    <h2>Analytics Dashboard</h2>
+                </div>
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h3>QoQ Trends</h3>
+                        <div id="trends-chart"></div>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Goal Distribution</h3>
+                        <div id="distribution-chart"></div>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>UoM Breakdown</h3>
+                        <div id="uom-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
